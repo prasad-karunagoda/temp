@@ -21,6 +21,7 @@ public class YieldBook implements InstrumentSource {
         // Fetching instruments and processing them can be delegated to a separate thread.
         // In that case, loadInstruments will return immediately and callback.call(); will be called
         // when the data is ready.
+        // E.g. See CompletableFutureTest
         List<String> sampleInstruments = Arrays.asList("YBIns1", "YBIns2", "YBIns3");
         Set<Instrument> instruments = sampleInstruments.stream()
                 .map(ins -> getInstrumentDataConverter().convert(ins))
@@ -29,7 +30,8 @@ public class YieldBook implements InstrumentSource {
 
         try {
             callback.call();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
