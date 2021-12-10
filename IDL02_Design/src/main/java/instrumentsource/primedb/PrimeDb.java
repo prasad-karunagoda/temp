@@ -17,6 +17,10 @@ public class PrimeDb implements InstrumentSource {
 
     @Override
     public void loadInstruments(Callable<Object> callback) {
+        // Implementation of this loadInstruments can be asynchronous.
+        // Fetching instruments and processing them can be delegated to a separate thread.
+        // In that case, loadInstruments will return immediately and callback.call(); will be called
+        // when the data is ready.
         List<String> sampleInstruments = Arrays.asList("PrimeIns1", "PrimeIns2", "PrimeIns3");
         Set<Instrument> instruments = sampleInstruments.stream()
                 .map(ins -> getInstrumentDataConverter().convert(ins))
